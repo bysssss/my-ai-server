@@ -1,0 +1,20 @@
+[project]
+name = "my-ai-server"
+version = "0.1.0"
+description = "AI 에이전트 개발 패턴 레퍼런스 서버"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi[standard]>=0.115.12",
+    "pydantic>=2.11.3",
+    "pydantic-settings>=2.8.1",
+    "loguru>=0.7.3",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.5",
+]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
