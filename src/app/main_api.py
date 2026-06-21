@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 
-from app.api.health.health_router import router as health_router
+from app.health.router import router as health_router
 from app.core.logger import logger
 from app.core.settings import settings
 

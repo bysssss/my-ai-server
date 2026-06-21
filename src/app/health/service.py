@@ -1,5 +1,5 @@
-from app.api.health.health_spec import HealthResponse
 from app.core.settings import settings
+from app.health.schemas import HealthResponse
 
 
 async def get_health() -> HealthResponse:

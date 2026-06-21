@@ -53,17 +53,18 @@ which python3
 root
 ├── src
 │   └── app
-│       ├── api               # 엔드포인트 (router → spec → api)
-│       │   └── health
+│       ├── health            # 도메인 (router / schemas / service)
 │       ├── core              # settings(설정), logger(로깅)
 │       └── main_api.py       # FastAPI 엔트리포인트
+├── tasks                     # 작업 단위 문서
+├── docs                      # 개념·패턴 문서
 ├── tests
 ├── docker                    # Dockerfile (base) / Dockerfile.local
 ├── docker-compose.yaml
 ├── Makefile
 ├── pyproject.toml            # 의존성 (uv)
 ├── .env.example              # 환경변수 예시 (MY_* 접두)
-├── CLAUDE.md                 # AI 작업용 규칙 문서
+├── AGENTS.md                 # AI 작업 규칙 (CLAUDE.md 는 @AGENTS.md)
 └── README.md
 ```
 
