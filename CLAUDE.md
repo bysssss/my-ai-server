@@ -1,5 +1,6 @@
-# my-ai-server
+# CLAUDE.md
 
-규칙은 모든 AI 공통으로 `AGENTS.md` 를 따른다. (Claude Code 전용 지침이 필요해지면 아래에 추가)
+Claude Code 전용 가이드. 공통 규칙은 `AGENTS.md`(자동 로드)를 따른다.
+Claude 전용으로 추가할 지침이 생기면 여기에 적는다.
 
-@AGENTS.md
+(현재 Claude 전용 지침 없음)

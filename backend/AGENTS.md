@@ -22,7 +22,6 @@ backend/
   tests/                   # pytest
   docker/                  # Dockerfile(base) / Dockerfile.local
   docker-compose.yaml
-  Makefile                 # 빌드·실행 명령
   pyproject.toml / uv.lock
 ```
 

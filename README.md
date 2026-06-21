@@ -60,12 +60,12 @@ my-ai-server/
 │   ├── tests/
 │   ├── docker/
 │   ├── docker-compose.yaml
-│   ├── Makefile
 │   ├── pyproject.toml     # 의존성 (uv)
 │   └── AGENTS.md          # 백엔드 스택 규칙
 ├── frontend/             # React + TS (추후)
 ├── docs/                 # 개념·패턴 문서
 ├── tasks/                # 작업 단위 문서
+├── Makefile              # 명령 센터 (be-* / fe-*)
 ├── AGENTS.md             # 공통 규칙 (CLAUDE.md 는 @AGENTS.md)
 └── README.md
 ```
