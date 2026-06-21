@@ -1,6 +1,6 @@
 # my-ai-server
 
-AI 에이전트 개발 패턴을 정리하는 레퍼런스 프로젝트.
+AI 에이전트 개발 패턴을 정리하는 레퍼런스 프로젝트. BE/FE를 한 레포에 두는 모노레포.
 
 ## 초기 환경 세팅
 
@@ -27,52 +27,50 @@ Cursor 실행 후 `Cmd + Shift + X` (Extensions) 에서 아래 설치:
 - **Python** (ms-python) — Python 언어 지원
 - **Claude** — AI 어시스턴트
 
-### 4. 의존성 설치
+### 4. 백엔드 의존성 설치
 
 ```bash
+cd backend
 uv sync
 ```
 
-`.venv` 가 생성되고 의존성이 설치된다.
+`backend/.venv` 가 생성되고 의존성이 설치된다.
 
 ### 5. Python 인터프리터 설정
 
 1. `Cmd + Shift + P` → `Python: Select Interpreter`
-2. `.venv` 안의 `Python 3.12.x` 선택
+2. `backend/.venv` 안의 `Python 3.12.x` 선택
 
 ### 6. 확인
 
 ```bash
 which python3
-# /Users/<user>/Codes/my-ai-server/.venv/bin/python3 이면 정상
+# .../my-ai-server/backend/.venv/bin/python3 이면 정상
 ```
 
-## 프로젝트 구조
+## 프로젝트 구조 (모노레포)
 
 ```
-root
-├── src
-│   └── app
-│       ├── health            # 도메인 (router / schemas / service)
-│       ├── core              # settings(설정), logger(로깅)
-│       └── main_api.py       # FastAPI 엔트리포인트
-├── tasks                     # 작업 단위 문서
-├── docs                      # 개념·패턴 문서
-├── tests
-├── docker                    # Dockerfile (base) / Dockerfile.local
-├── docker-compose.yaml
-├── Makefile
-├── pyproject.toml            # 의존성 (uv)
-├── .env.example              # 환경변수 예시 (MY_* 접두)
-├── AGENTS.md                 # AI 작업 규칙 (CLAUDE.md 는 @AGENTS.md)
+my-ai-server/
+├── backend/              # FastAPI (Python)
+│   ├── src/app/
+│   │   ├── health        # 도메인 (router / schemas / service)
+│   │   ├── core          # settings, logger
+│   │   └── main_api.py   # 엔트리포인트
+│   ├── tests/
+│   ├── docker/
+│   ├── docker-compose.yaml
+│   ├── Makefile
+│   ├── pyproject.toml     # 의존성 (uv)
+│   └── AGENTS.md          # 백엔드 스택 규칙
+├── frontend/             # React + TS (추후)
+├── docs/                 # 개념·패턴 문서
+├── tasks/                # 작업 단위 문서
+├── AGENTS.md             # 공통 규칙 (CLAUDE.md 는 @AGENTS.md)
 └── README.md
 ```
 
 ## Tech Stack
 
-- Python 3.12, Docker, Docker Compose
-- [FastAPI](https://fastapi.tiangolo.com) — async 웹 프레임워크
-- [Pydantic](https://docs.pydantic.dev) / pydantic-settings — 데이터 검증 + 설정 관리
-- [Loguru](https://github.com/Delgan/loguru) — 로깅
-- [uv](https://docs.astral.sh/uv) — 패키지 매니저
-- [pytest](https://docs.pytest.org) — 테스트
+- **백엔드**: Python 3.12 / [FastAPI](https://fastapi.tiangolo.com) / [Pydantic](https://docs.pydantic.dev) · pydantic-settings / [Loguru](https://github.com/Delgan/loguru) / [uv](https://docs.astral.sh/uv) / Docker
+- **프론트**: React + TypeScript (추후)
