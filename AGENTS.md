@@ -92,7 +92,7 @@ tasks/      # 작업 단위 문서
 
 ## 향후 방향 (TBD)
 
-- frontend (React + TS) 추가
+- 깃 브랜치 전략 (현재 `main` 직접 커밋·배포 = 최소 형태, 추후 정리)
 - DDD / TDD 도입 여부 (별도 논의)
 - `.claude/` 스킬 (필요 시 — 첫 후보: commit-recommend, branch-name)
 - LLM 제공자 연동 · 런타임 패턴 콘텐츠
