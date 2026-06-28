@@ -19,7 +19,14 @@
 - GCP 프로젝트 `abyssey` (number 9242752760), 결제 계정 연결됨.
 - 서비스 계정 `abyssey-sa@abyssey.iam.gserviceaccount.com` (Owner), 키 = `secrets/gcp-sa.json`.
 - 활성화된 API: Cloud Run / Cloud Build / Artifact Registry / Resource Manager / Service Usage.
-- **아직 안 함**: BE Cloud Run 실제 배포, FE Cloudflare Pages 연동.
+- **FE 배포 완료**: Cloudflare Pages 프로젝트 `my-ai-server` → **https://my-ai-server.pages.dev** (라이브).
+- **아직 안 함**: BE Cloud Run 실제 배포.
+
+### FE (Cloudflare Pages) — 배포됨
+- 프로젝트: `my-ai-server` / 주소: `my-ai-server.pages.dev`
+- GitHub `bysssss/my-ai-server` 연동, **Production branch `main` → push 시 자동 재빌드·배포**.
+- 빌드 설정: Framework preset **None**, **Root directory `frontend`**, Build `npm run build`, Output `dist`.
+  (Cloudflare preset 목록엔 Vite가 없음 — Vite는 프레임워크가 아니라 빌드도구라서. preset None + 위 값 수동 지정.)
 
 ## AI가 GCP를 제어하는 법
 
@@ -41,9 +48,9 @@ gcloud config set project abyssey
 4. (이후 AI가) gcloud 인증 + 필요한 API 활성화(`gcloud services enable ...`).
 5. (권장) 결제 → 예산 및 알림 설정.
 
-## 배포 방법 (예정)
+## 배포 방법
 
-- **BE → Cloud Run**: 배포용 `backend/docker/Dockerfile`에 `$PORT` 바인딩 CMD 추가 후
+- **FE → Cloudflare Pages**: ✅ 완료 (위 "FE — 배포됨" 참조). `main` push 시 자동 배포.
+- **BE → Cloud Run**: (예정) 배포용 `backend/docker/Dockerfile`에 `$PORT` 바인딩 CMD 추가 후
   `gcloud run deploy` (소스에서 바로 빌드·배포 가능). Cloud Run은 컨테이너가 `0.0.0.0:$PORT`(기본 8080)에 떠야 함.
-- **FE → Cloudflare Pages**: GitHub 레포 연동. Root `frontend`, Build `npm run build`, Output `dist`.
-  분리 배포라 FE에서 BE API 주소(`VITE_API_URL`) + CORS 설정 필요.
+- **연동(예정)**: BE 배포되면 FE에서 BE API 주소(`VITE_API_URL` 환경변수) + CORS 설정 필요.
