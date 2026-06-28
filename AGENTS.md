@@ -46,6 +46,19 @@ tasks/      # 작업 단위 문서
 - 코드베이스 탐색이 필요하면 `Explore`/`Plan` 서브에이전트에 위임한다 (메인 컨텍스트 절약).
 - 형식은 템플릿을 따른다. 형식 자체를 이 문서에 중복 기술하지 않는다.
 
+## 인프라 / 배포
+
+- 배포: **BE = Cloud Run (GCP 프로젝트 `abyssey`)**, **FE = Cloudflare Pages**. (best-of-breed, 무료 → 종량)
+- **AI가 인프라를 직접 제어한다.** GCP는 `secrets/gcp-sa.json`(서비스 계정 키, gitignore)로 gcloud 인증해 운영한다:
+
+  ```
+  gcloud auth activate-service-account --key-file=secrets/gcp-sa.json
+  gcloud config set project abyssey
+  ```
+
+- 결정 배경·최초 셋업·배포 방법은 `docs/infra.md`, 키·시크릿 규칙은 `secrets/README.md` 참조.
+- ⚠️ `secrets/` 의 키는 절대 커밋·공유 금지.
+
 ## Git
 
 ### 커밋 메시지
@@ -75,6 +88,7 @@ tasks/      # 작업 단위 문서
 ## 참고 문서
 
 - 에이전틱 개발: `docs/agentic.md` — 개발 시간(에이전트로 개발) + 런타임(앱 적용 패턴) 두 층위 정리
+- 인프라/배포: `docs/infra.md` — BE=Cloud Run / FE=Cloudflare 결정·최초 셋업·AI 제어법
 
 ## 향후 방향 (TBD)
 

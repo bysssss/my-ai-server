@@ -61,6 +61,7 @@ ENV/
 # secrets
 secrets/*
 !secrets/secrets.txt
+!secrets/README.md
 
 # Ruff
 .ruff_cache/
