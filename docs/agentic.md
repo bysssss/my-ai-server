@@ -57,7 +57,8 @@ Claude Code 기반으로 개발할 때의 구성 요소.
 - **4문서 스펙** (회사는 6문서: 01_README·02_spec·03_findings·04_plan·05_tasks·06_progress) — 팀 규모가 아니라 findings/tasks 분리는 과함. 필요해지면 확장.
 - **시크릿/인프라 AI 제어** (`secrets/` 라우팅) — 회사 표준에 없는 우리 확장 (member-api의 최대 약점으로 분석됨).
 
-회사 것 중 보류: CodeRabbit AI 리뷰·CI 게이트·PR 루프 (브랜치 전략과 묶어 TBD), `.claude/settings.json` 훅(회사에도 없음 — 우리가 앞설 지점, TBD).
+회사 것 중 보류: CodeRabbit AI 리뷰·CI 게이트·PR 루프 (브랜치 전략과 묶어 TBD).
+회사 것 너머로 확장: **`.claude/settings.json` 권한 allowlist + PostToolUse lint 훅**(ruff/oxlint, warning 0) — 회사 레포엔 없는 기계적 강제 층. 산문 규칙(모델 준수 의존)을 하네스 강제로 한 단계 올린 것.
 
 ---
 

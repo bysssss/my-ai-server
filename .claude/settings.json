@@ -1,0 +1,33 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(git status:*)",
+      "Bash(git diff:*)",
+      "Bash(git log:*)",
+      "Bash(git branch:*)",
+      "Bash(ls:*)",
+      "Bash(find:*)",
+      "Bash(grep:*)",
+      "Bash(rg:*)",
+      "Bash(jq:*)",
+      "Bash(cd frontend && npm run:*)",
+      "Bash(cd backend && uv run pytest:*)",
+      "Bash(cd backend && uv run ruff:*)"
+    ]
+  },
+  "hooks": {
+    "PostToolUse": [
+      {
+        "matcher": "Write|Edit",
+        "hooks": [
+          {
+            "type": "command",
+            "command": "f=$(jq -r \".tool_input.file_path // .tool_response.filePath // empty\"); [ -z \"$f\" ] && exit 0; [ -f \"$f\" ] || exit 0; case \"$f\" in */backend/*.py) cd \"${CLAUDE_PROJECT_DIR:-.}/backend\" && out=$(uv run ruff check \"$f\" 2>&1) || { echo \"$out\" >&2; exit 2; };; */frontend/*.ts|*/frontend/*.tsx) cd \"${CLAUDE_PROJECT_DIR:-.}/frontend\" && out=$(npx oxlint --deny-warnings \"$f\" 2>&1) || { echo \"$out\" >&2; exit 2; };; esac; exit 0",
+            "timeout": 60,
+            "statusMessage": "lint 검사 중 (ruff/oxlint)"
+          }
+        ]
+      }
+    ]
+  }
+}

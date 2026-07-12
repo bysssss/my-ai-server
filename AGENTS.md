@@ -59,6 +59,11 @@ skills/     # 반복 절차 스킬 (.claude/skills 가 심볼릭 링크)
 - 현재: `commit`(팀 규칙 커밋), `create-pr`(PR 생성 — 브랜치 전략 도입 후 사용).
 - 위험 명령이 필요한 스킬은 SKILL.md 안에서 허용 범위(명령·대상·조건)를 명시하고 그 범위에서만 쓴다.
 
+## 하네스 설정 (.claude/settings.json)
+
+- 안전한 읽기·검증 명령은 권한 allowlist로 자동 허용된다 (git status/diff/log, lint/test 실행 등).
+- **PostToolUse 훅이 파일 수정마다 lint를 기계적으로 강제한다** — backend `*.py` → ruff, frontend `*.ts/tsx` → oxlint `--deny-warnings`. 위반이면 수정이 차단 피드백으로 돌아온다. **warning도 0이어야 한다.**
+
 ## 인프라 / 배포
 
 - 배포: **BE = Cloud Run (GCP 프로젝트 `abyssey`)**, **FE = Cloudflare Pages**. (best-of-breed, 무료 → 종량)
@@ -109,6 +114,5 @@ skills/     # 반복 절차 스킬 (.claude/skills 가 심볼릭 링크)
 ## 향후 방향 (TBD)
 
 - 깃 브랜치 전략 + AI 리뷰(CodeRabbit 등)·CI 게이트·PR 루프 (현재 `main` 직접 커밋·배포 = 최소 형태, 묶어서 정리)
-- `.claude/settings.json` 권한 allowlist·훅 — lint/test를 하네스가 기계적으로 강제 (회사 레포에도 없는 확장 지점)
 - DDD / TDD 도입 여부 (별도 논의)
 - LLM 제공자 연동 · 런타임 패턴 콘텐츠
