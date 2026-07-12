@@ -28,7 +28,11 @@
 - 빌드 설정: Framework preset **None**, **Root directory `frontend`**, Build `npm run build`, Output `dist`.
   (Cloudflare preset 목록엔 Vite가 없음 — Vite는 프레임워크가 아니라 빌드도구라서. preset None + 위 값 수동 지정.)
 
-## AI가 GCP를 제어하는 법
+## AI가 인프라를 제어하는 법
+
+작업 대상에 맞는 키를 `secrets/`에서 골라 쓴다 (라우팅·상세는 `secrets/README.md`). 머신 전역 로그인에 기대지 않는다.
+
+### GCP (gcloud)
 
 ```bash
 gcloud auth activate-service-account --key-file=secrets/gcp-sa.json
@@ -36,17 +40,41 @@ gcloud config set project abyssey
 # 이후 gcloud 로 배포·리소스 제어 (예: gcloud run deploy ...)
 ```
 
-- 키 상세·기타 시크릿 규칙은 `secrets/README.md`.
 - ⚠️ `secrets/gcp-sa.json` = 프로젝트 전권. **절대 커밋·공유 금지** (gitignore됨).
 - ⚠️ 인증 시 gcloud 머신 전역 활성 계정이 바뀜 → 다른 GCP 프로젝트 작업 시 계정 전환.
 
+### GitHub (gh)
+
+```bash
+GH_TOKEN=$(cat secrets/github-token.txt) gh <명령>
+```
+
+- 이슈·PR·레포 관리 등 gh API 작업을 **bysssss 명의**로 실행 (fine-grained PAT, `my-ai-server` 한정).
+- git push/pull 은 머신 SSH 키로 동작 — 토큰과 무관.
+
 ## 최초 셋업 절차 (사람이 1회)
+
+### GCP (BE)
 
 1. GCP 콘솔에서 프로젝트 생성 + 결제 계정 연결.
 2. IAM → 서비스 계정 생성 → 역할 Owner → 키 추가(JSON) 다운로드.
 3. 키를 `secrets/gcp-sa.json` 으로 저장.
 4. (이후 AI가) gcloud 인증 + 필요한 API 활성화(`gcloud services enable ...`).
 5. (권장) 결제 → 예산 및 알림 설정.
+
+### GitHub (레포 관리 PAT)
+
+1. `bysssss` 로그인 → Settings → Developer settings → Fine-grained tokens 발급
+   (Repository `my-ai-server` 한정, Contents·Issues·Pull requests·Actions·Workflows = RW).
+2. `secrets/github-token.txt` 로 저장.
+
+### Cloudflare Pages (FE)
+
+1. dash.cloudflare.com 가입 (카드·API 키 불필요).
+2. Workers & Pages → Pages → **Connect to Git** → GitHub 인증 → 레포 선택.
+   (새 UI는 Workers가 기본이라 "Looking to deploy Pages? Get started" 링크로 진입)
+3. 빌드 설정: preset **None** / Root `frontend` / Build `npm run build` / Output `dist` → Save and Deploy.
+4. 끝 — 이후 `main` push마다 자동 배포. main 외 브랜치 push는 **프리뷰 URL**(해시.my-ai-server.pages.dev)이 자동 생성된다(프로덕션과 별개).
 
 ## 배포 방법
 

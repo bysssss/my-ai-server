@@ -9,7 +9,7 @@
 
 ## 산출물 위치
 
-- 목업: `tasks/2026-06-27-abyssey-landing/abyssey-hero.mockup.html` (이미지 `abyss.jpg`·`abyssey.png` 같은 폴더)
+- 목업: `specs/2026-06-27-abyssey-landing/abyssey-hero.mockup.html` (이미지 `abyss.jpg`·`abyssey.png` 같은 폴더)
 - 실제 에셋: `frontend/public/abyssey.png`(투명 로고)·`abyss.png`(원본)·`abyss.jpg`(웹용 축소)
 - 미리보기 아티팩트(claude.ai, data URI 임베드본): 스크롤 목업 `…/3209bcc9…`
 

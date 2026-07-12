@@ -62,9 +62,9 @@ my-ai-server/
 │   ├── docker-compose.yaml
 │   ├── pyproject.toml     # 의존성 (uv)
 │   └── AGENTS.md          # 백엔드 스택 규칙
-├── frontend/             # React + TS (추후)
+├── frontend/             # React + TS + Vite (Abyssey 랜딩)
 ├── docs/                 # 개념·패턴 문서
-├── tasks/                # 작업 단위 문서
+├── specs/                # 작업 단위 스펙 문서 (SDD)
 ├── Makefile              # 명령 센터 (be-* / fe-*)
 ├── AGENTS.md             # 공통 규칙 (CLAUDE.md 는 @AGENTS.md)
 └── README.md
@@ -73,4 +73,4 @@ my-ai-server/
 ## Tech Stack
 
 - **백엔드**: Python 3.12 / [FastAPI](https://fastapi.tiangolo.com) / [Pydantic](https://docs.pydantic.dev) · pydantic-settings / [Loguru](https://github.com/Delgan/loguru) / [uv](https://docs.astral.sh/uv) / Docker
-- **프론트**: React + TypeScript (추후)
+- **프론트**: React 19 / TypeScript / [Vite](https://vite.dev) / [Tailwind CSS](https://tailwindcss.com)
