@@ -20,7 +20,21 @@
 - 서비스 계정 `abyssey-sa@abyssey.iam.gserviceaccount.com` (Owner), 키 = `secrets/gcp-sa.json`.
 - 활성화된 API: Cloud Run / Cloud Build / Artifact Registry / Resource Manager / Service Usage.
 - **FE 배포 완료**: Cloudflare Pages 프로젝트 `my-ai-server` → **https://my-ai-server.pages.dev** (라이브).
-- **아직 안 함**: BE Cloud Run 실제 배포.
+- **BE 배포 완료** (2026-07-12): Cloud Run 서비스 `my-ai-server`(서울) → **https://my-ai-server-9242752760.asia-northeast3.run.app** (`/health` 라이브).
+
+### BE (Cloud Run) — 배포됨
+
+- 서비스 `my-ai-server` / 리전 `asia-northeast3` / 공개(allUsers invoker) / **min 0(idle $0)·max 2** / 512Mi·1CPU / env `MY_*`
+- 이미지: Artifact Registry `asia-northeast3-docker.pkg.dev/abyssey/my-ai-server/backend:sha-<커밋7자리>` (latest 금지)
+- 배포 절차 (AI가 gcloud로 직접 — 상세·함정은 `specs/2026-07-12-be-cloud-run-deploy/`):
+
+  ```bash
+  docker build --platform linux/amd64 -t <이미지:sha-태그> -f backend/docker/Dockerfile backend
+  docker push <이미지:sha-태그>
+  gcloud run deploy my-ai-server --image <이미지:sha-태그> --region asia-northeast3
+  ```
+
+- ⚠️ SA는 **Owner 필요** — Editor면 배포는 되나 공개(IAM) 설정에서 막힘 (2026-07-12 Editor→Owner 상향으로 해결).
 
 ### FE (Cloudflare Pages) — 배포됨
 - 프로젝트: `my-ai-server` / 주소: `my-ai-server.pages.dev`
@@ -79,6 +93,5 @@ GH_TOKEN=$(cat secrets/github-token.txt) gh <명령>
 ## 배포 방법
 
 - **FE → Cloudflare Pages**: ✅ 완료 (위 "FE — 배포됨" 참조). `main` push 시 자동 배포.
-- **BE → Cloud Run**: (예정) 배포용 `backend/docker/Dockerfile`에 `$PORT` 바인딩 CMD 추가 후
-  `gcloud run deploy` (소스에서 바로 빌드·배포 가능). Cloud Run은 컨테이너가 `0.0.0.0:$PORT`(기본 8080)에 떠야 함.
-- **연동(예정)**: BE 배포되면 FE에서 BE API 주소(`VITE_API_URL` 환경변수) + CORS 설정 필요.
+- **BE → Cloud Run**: ✅ 완료 (위 "BE — 배포됨" 참조). 현재는 AI가 gcloud로 수동 배포 — 깃액션 자동화는 브랜치 전략과 묶어 추후.
+- **연동(예정)**: FE에서 BE API 주소(`VITE_API_URL` 환경변수) + CORS 설정 필요.

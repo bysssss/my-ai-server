@@ -114,5 +114,6 @@ skills/     # 반복 절차 스킬 (.claude/skills 가 심볼릭 링크)
 ## 향후 방향 (TBD)
 
 - 깃 브랜치 전략 + AI 리뷰(CodeRabbit 등)·CI 게이트·PR 루프 (현재 `main` 직접 커밋·배포 = 최소 형태, 묶어서 정리)
+  — 방향 확정(2026-07-12): **GitHub Flow**(main + feature 브랜치 + PR) + 라이브 생기면 태그 승격(회사 esign 방식과 동일 계열)
 - DDD / TDD 도입 여부 (별도 논의)
 - LLM 제공자 연동 · 런타임 패턴 콘텐츠
