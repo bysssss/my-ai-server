@@ -15,11 +15,11 @@
 
 ## 단계
 
-- [ ] 1. `frontend/` 구동 — 스캐폴드는 병합됨, `npm install`로 Tailwind 등 설치 남음
-- [ ] 2. 목업(`abyssey-hero.mockup.html`)을 React 컴포넌트로 이식
-      - 심연 canvas(배경/빛줄기/입자/바닥글로우) → `AbyssCanvas` (useEffect)
+- [x] 1. `frontend/` 구동 — `npm install` 완료 (React 19 / Vite 8 / Tailwind v4)
+- [x] 2. 목업(`abyssey-hero.mockup.html`)을 React 컴포넌트로 이식 — 완료, 배포까지 됨(my-ai-server.pages.dev)
+      - 심연 canvas(배경/빛줄기/입자/바닥글로우) → `abyss.ts` useAbyss 훅
       - 우측 수심계(−0m→−6000m→THE FLOOR), Nav, Hero, depth 카피 라인, 3카드, 바닥 reveal, Footer
-      - 바닥 beam = wrapper-blur + 이미지에 묶기(`bottom:%`), 브랜드 락업 (notes.md 참고)
+      - 바닥 beam = wrapper-blur + 이미지에 묶기(`bottom:%`), 브랜드 락업 (04_notes.md 참고)
 - [x] 3. 로고·바닥 이미지 적용 (목업 기준 완료): 로고 PNG 배경 투명화 → nav, 바닥 abyss.png(테두리 자름)→JPEG 축소.
       React 이식 때 `frontend/public/`에서 참조.
 - [ ] 4. (선택) Vite proxy로 BE `/health` 호출해 화면에 표시 (BE+FE 연결 확인)

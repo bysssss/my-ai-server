@@ -42,6 +42,23 @@ Claude Code 기반으로 개발할 때의 구성 요소.
 - 기본 패턴: **Plan(계획) → Act(실행) → Observe(관찰) → 반복**.
 - **Plan Mode**: 읽기 전용으로 분석 후 계획 수립, 승인 뒤 실행. 큰 작업·방향 잡을 때.
 
+### 회사 표준과의 관계 (member-api·esign-service 조사, 2026-07-12)
+
+회사 AI 셋팅 표준(member-api = 기준, 스펙 210개 실사용 / esign-service = 최신 이식본)을 조사해 채택한 것:
+
+- **단일 규칙 문서 + 심볼릭 링크** — `AGENTS.md` 하나를 `CLAUDE.md` 가 링크. 도구가 늘어도 갱신 지점은 한 곳. (회사는 GEMINI.md까지 — 필요해지면 추가)
+- **스킬 체계** — 루트 `skills/` + `.claude/skills` 심링크, `commit`·`create-pr` 로 시작. 위험 명령은 스킬 안에서만 범위 한정 허용하는 패턴 차용.
+- **spec 문서 번호 prefix**(01_~04_) + `03_progress` 의 **Reboot Check**(세션 재개 5문항).
+- **Code Reading Protocol** — 부분만 읽고 단정 금지 (AGENTS.md 행동 원칙).
+
+의도적으로 다르게 가는 것:
+
+- **에이전트 메모리 사용** (회사는 금지) — 이 레포는 메모리 활용 자체가 시연 대상.
+- **4문서 스펙** (회사는 6문서: 01_README·02_spec·03_findings·04_plan·05_tasks·06_progress) — 팀 규모가 아니라 findings/tasks 분리는 과함. 필요해지면 확장.
+- **시크릿/인프라 AI 제어** (`secrets/` 라우팅) — 회사 표준에 없는 우리 확장 (member-api의 최대 약점으로 분석됨).
+
+회사 것 중 보류: CodeRabbit AI 리뷰·CI 게이트·PR 루프 (브랜치 전략과 묶어 TBD), `.claude/settings.json` 훅(회사에도 없음 — 우리가 앞설 지점, TBD).
+
 ---
 
 ## 2. 런타임 에이전틱 — 애플리케이션 패턴
