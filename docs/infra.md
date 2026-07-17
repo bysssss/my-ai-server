@@ -17,6 +17,7 @@
 ## 현재 상태 (2026-06-28)
 
 - GCP 프로젝트 `abyssey` (number 9242752760), 결제 계정 연결됨.
+  (⚠️ 네이밍 원칙상 인프라는 `my-ai-server`가 맞지만 프로젝트 ID는 변경 불가 — "Abyssey 서비스를 담는 그릇"으로 읽고 유지. 필요하면 콘솔 표시명만 변경 가능)
 - 서비스 계정 `abyssey-sa@abyssey.iam.gserviceaccount.com` (Owner), 키 = `secrets/gcp-sa.json`.
 - 활성화된 API: Cloud Run / Cloud Build / Artifact Registry / Resource Manager / Service Usage.
 - **FE 배포 완료**: Cloudflare Pages 프로젝트 `my-ai-server` → **https://my-ai-server.pages.dev** (라이브).
