@@ -42,23 +42,13 @@ Claude Code 기반으로 개발할 때의 구성 요소.
 - 기본 패턴: **Plan(계획) → Act(실행) → Observe(관찰) → 반복**.
 - **Plan Mode**: 읽기 전용으로 분석 후 계획 수립, 승인 뒤 실행. 큰 작업·방향 잡을 때.
 
-### 회사 표준과의 관계 (member-api·esign-service 조사, 2026-07-12)
+### 회사 표준과의 관계
 
-회사 AI 셋팅 표준(member-api = 기준, 스펙 210개 실사용 / esign-service = 최신 이식본)을 조사해 채택한 것:
+회사 레포(member-api·esign-service·team-pulse)를 조사해 규칙·절차·게이트 층을 가져왔다. 회사는 Java/Spring 이라 코드는 참고 대상이 아니다.
 
-- **단일 규칙 문서 + 심볼릭 링크** — `AGENTS.md` 하나를 `CLAUDE.md` 가 링크. 도구가 늘어도 갱신 지점은 한 곳. (회사는 GEMINI.md까지 — 필요해지면 추가)
-- **스킬 체계** — 루트 `skills/` + `.claude/skills` 심링크, `commit`·`create-pr` 로 시작. 위험 명령은 스킬 안에서만 범위 한정 허용하는 패턴 차용.
-- **spec 문서 번호 prefix**(01_~04_) + `03_progress` 의 **Reboot Check**(세션 재개 5문항).
-- **Code Reading Protocol** — 부분만 읽고 단정 금지 (AGENTS.md 행동 원칙).
+**무엇을 적용했고, 무엇을 왜 안 했는지, 어디를 일부러 다르게 갔는지는 [`standards-adoption.md`](standards-adoption.md)에 있다.** 여기에 중복해 적지 않는다.
 
-의도적으로 다르게 가는 것:
-
-- **에이전트 메모리 사용** (회사는 금지) — 이 레포는 메모리 활용 자체가 시연 대상.
-- **4문서 스펙** (회사는 6문서: 01_README·02_spec·03_findings·04_plan·05_tasks·06_progress) — 팀 규모가 아니라 findings/tasks 분리는 과함. 필요해지면 확장.
-- **시크릿/인프라 AI 제어** (`secrets/` 라우팅) — 회사 표준에 없는 우리 확장 (member-api의 최대 약점으로 분석됨).
-
-회사 것 중 보류: CodeRabbit AI 리뷰·CI 게이트·PR 루프 (브랜치 전략과 묶어 TBD).
-회사 것 너머로 확장: **`.claude/settings.json` 권한 allowlist + PostToolUse lint 훅**(ruff/oxlint, warning 0) — 회사 레포엔 없는 기계적 강제 층. 산문 규칙(모델 준수 의존)을 하네스 강제로 한 단계 올린 것.
+한 가지만 여기 남긴다 — 회사 것 너머로 확장한 부분이다. **`.claude/settings.json` 의 권한 allowlist + PostToolUse lint 훅**(ruff/oxlint, warning 0)은 회사 레포에 없는 기계적 강제 층이다. 산문 규칙은 모델의 준수에 의존하지만 훅은 막는다 — 규칙을 하네스로 한 단계 올린 것이고, 이 문서가 다루는 "개발 시간 에이전틱"의 핵심 도구다.
 
 ---
 
