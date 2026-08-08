@@ -14,7 +14,7 @@
 - 다른 후보 비교: BE는 Render/Railway/Fly(도커 PaaS)도 있으나 MQ·다양한 DB·관측성에서 천장이 빨라 GCP를 택함.
 - best-of-breed라 DB/MQ는 필요 시 GCP 네이티브(Cloud SQL/Pub/Sub) 또는 외부 무료(Neon/Upstash)로.
 
-## 현재 상태 (2026-06-28)
+## 현재 상태
 
 - GCP 프로젝트 `abyssey` (number 9242752760), 결제 계정 연결됨.
   (⚠️ 네이밍 원칙상 인프라는 `my-ai-server`가 맞지만 프로젝트 ID는 변경 불가 — "Abyssey 서비스를 담는 그릇"으로 읽고 유지. 필요하면 콘솔 표시명만 변경 가능)
