@@ -1,0 +1,75 @@
+# PR·main 푸시마다 백엔드·프런트엔드를 검증한다.
+#
+# 그동안 이 저장소에는 «검사»가 없었다. main 에 푸시하면 Cloudflare Pages 가
+# 곧바로 빌드·배포하는데 그것은 검사가 아니라 배포라서, lint·테스트가 깨진
+# 상태로도 그냥 나갔다. 그 자리를 메운다.
+#
+# 여기서는 검사만 한다 — 배포는 종전대로 Cloudflare Pages(자동)와
+# Cloud Run(gcloud 수동, docs/infra.md)이 맡는다. 검사와 배포를 한 파일에
+# 섞으면 어느 쪽이 실패했는지 흐려진다.
+name: CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  backend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: backend
+    steps:
+      - uses: actions/checkout@v4
+
+      # uv 가 파이썬까지 관리한다 — 러너의 파이썬을 따로 세팅하지 않는다.
+      # 버전은 backend/.python-version 이 정한다 (로컬과 같은 근거).
+      - uses: astral-sh/setup-uv@v5
+        with:
+          enable-cache: true
+          cache-dependency-glob: backend/uv.lock
+
+      # --frozen: uv.lock 을 그대로 쓴다. 잠금이 실제 의존성과 어긋나면
+      # 조용히 갱신하지 말고 실패해야 한다.
+      - name: Install
+        run: uv sync --frozen
+
+      # AGENTS.md 2·7장 — warning 도 0 이어야 한다.
+      - name: Lint
+        run: uv run ruff check .
+
+      - name: Test
+        run: uv run pytest -q
+
+  frontend:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: frontend
+    steps:
+      - uses: actions/checkout@v4
+
+      # 경로를 명시해야 한다: defaults.run.working-directory 는 run 단계에만
+      # 걸리고 액션 입력에는 안 걸려서, 기본값이면 저장소 루트를 본다.
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: npm
+          cache-dependency-path: frontend/package-lock.json
+
+      # npm ci 는 package-lock.json 을 그대로 쓴다 (install 과 달리 잠금을
+      # 갱신하지 않는다) — 로컬과 CI 가 같은 트리를 본다.
+      - name: Install
+        run: npm ci
+
+      - name: Lint
+        run: npm run lint
+
+      # build 는 `tsc -b && vite build` 라 타입 검사까지 함께 돈다.
+      # 별도 typecheck 단계를 두지 않는 이유다.
+      - name: Build
+        run: npm run build
+
+# 커버리지 게이트는 아직 두지 않는다. 테스트가 적어 기준선을 그으면
+# 숫자놀음이 된다 — 테스트가 쌓인 뒤 측정하고 건다 (docs/standards-adoption.md).
