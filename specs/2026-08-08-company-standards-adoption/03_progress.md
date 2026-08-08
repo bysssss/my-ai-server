@@ -4,8 +4,8 @@
 
 ## Reboot Check (세션 재개용 — 마지막 세션이 끝날 때 갱신)
 
-1. 지금 뭐 하고 있었나: **0~7단계 구현 완료.** 체크박스 35개 전부 처리. 커밋은 안 함 (사용자 요청 대기)
-2. 다음 할 일: 커밋 → (원하면) PR. 그 뒤로는 이 spec 범위 밖 — `docs/agentic.md` 2장 런타임 패턴이 다음 본 작업
+1. 지금 뭐 하고 있었나: **이 작업은 끝났다.** 0~7단계 구현 → 커밋 9개 → PR #1 → squash 머지 완료 (`main` = `fd41a84`)
+2. 다음 할 일: 이 spec 범위 밖이다. 미완 항목은 `AGENTS.md` 15장과 `docs/standards-adoption.md` 「보류·앞으로」에 조건과 함께 적혀 있다 — 이 폴더를 다시 열 일은 없다
 3. 만진 파일: `AGENTS.md`(전면 재편 15장) · `backend/AGENTS.md` · `frontend/AGENTS.md`(신설) · `.editorconfig`(신설) · `specs/README.md`(신설) · `specs/_template/` 4파일 · `skills/review/`(신설) · `skills/commit`·`create-pr` · `docs/standards-adoption.md`(신설) · `docs/agentic.md` · `docs/infra.md` · `.github/workflows/ci.yml`(신설)
 4. 내린 결정: 회사 코드는 참고 대상 아님(Java) — 규칙·절차·게이트 층만. 메모리 금지는 반대로. `PATCH` 통일 안 함. 식별자는 ULID 아니라 **UUIDv7**. 문서 위생은 한 줄만. 표준 분리 구조는 버림. **CI 는 보류에서 빼고 7단계로 실행**
 5. 미해결/막힌 것: 없음. 보류는 커버리지 게이트(테스트 쌓인 뒤) · TDD 명문화(결정 대기)뿐
@@ -77,4 +77,5 @@
 - `npm run build` — 통과 (26 modules, tsc 타입 검사 포함)
 - 루트 AGENTS.md 가 참조하는 파일 10개 전부 존재 확인
 - 제목에 낡는 날짜가 남은 문서 없음
-- 미실행: `review` 스킬 실전 1회 (커밋 후 실제 diff 로 확인 예정)
+- **CI 실동작 확인** — PR #1 에서 backend 12s · frontend 14s 통과, 머지 후 main 에서도 26s 통과
+- 미실행: `review` 스킬 실전 1회 — 다음 코드 변경 때 자연히 돈다 (이 작업은 문서 위주라 규칙 체크 대상이 적었다)
