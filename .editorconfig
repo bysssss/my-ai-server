@@ -1,0 +1,31 @@
+# 에디터·도구가 파일을 저장하는 방식을 통일한다. 도구마다 기본값이 달라
+# 개행·공백만 바뀐 diff 가 섞여 들어오는 것을 막는 용도다.
+root = true
+
+[*]
+charset = utf-8
+end_of_line = lf
+insert_final_newline = true
+trim_trailing_whitespace = true
+indent_style = space
+indent_size = 2
+
+# 파이썬은 4칸 (PEP 8). ruff 도 이 기준으로 검사한다.
+[*.py]
+indent_size = 4
+max_line_length = 100
+
+[*.{ts,tsx,js,jsx,json,css,html}]
+indent_size = 2
+
+# YAML 은 2칸 고정 — 들여쓰기가 문법이라 흔들리면 파싱이 깨진다.
+[*.{yml,yaml}]
+indent_size = 2
+
+# 마크다운은 줄 끝 공백이 줄바꿈 문법이라 지우지 않는다.
+[*.md]
+trim_trailing_whitespace = false
+
+# Makefile 은 탭이 문법이다.
+[Makefile]
+indent_style = tab
