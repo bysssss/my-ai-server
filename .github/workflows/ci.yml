@@ -39,8 +39,12 @@ jobs:
       - name: Lint
         run: uv run ruff check .
 
+      # 커버리지 100% 아래면 실패한다. 코드가 health 도메인 하나뿐인 지금
+      # 걸었기 때문에 지킬 수 있는 기준이다 — 한 번 낮추면 올리는 시점이
+      # 오지 않으므로, 낮추지 말고 테스트를 채워서 통과시킨다. 정말 검증
+      # 불가능한 줄만 `# pragma: no cover` + 근거 주석으로 제외한다.
       - name: Test
-        run: uv run pytest -q
+        run: uv run pytest -q --cov=app --cov-fail-under=100
 
   frontend:
     runs-on: ubuntu-latest
@@ -71,5 +75,5 @@ jobs:
       - name: Build
         run: npm run build
 
-# 커버리지 게이트는 아직 두지 않는다. 테스트가 적어 기준선을 그으면
-# 숫자놀음이 된다 — 테스트가 쌓인 뒤 측정하고 건다 (docs/standards-adoption.md).
+# frontend 커버리지 게이트는 없다 — 테스트 프레임워크 자체가 아직 없다.
+# FE 테스트 도입과 묶어서 처리한다 (docs/backlog.md).
