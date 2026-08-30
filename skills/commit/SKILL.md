@@ -1,6 +1,6 @@
 ---
 name: commit
-description: 팀 규칙(한국어 50자 제목, WHY 본문, 명시적 스테이징)에 맞는 커밋을 만든다. 사용자가 커밋을 요청할 때 사용.
+description: 팀 규칙(한국어 50자 제목, WHY 본문, 명시적 스테이징)에 맞는 커밋을 만든다. 승인된 스펙 파이프라인 안에서는 자동 실행하고, 그 밖에서는 사용자가 요청할 때 사용.
 allowed-tools: Bash(git status:*), Bash(git diff:*), Bash(git log:*), Bash(git add:*), Bash(git commit:*), Bash(cd backend && uv run pytest:*), Bash(cd frontend && npm run:*), Read, Grep, Glob
 metadata:
   version: 2026.08.0
@@ -29,7 +29,8 @@ metadata:
    Co-Authored-By: Claude <실제 모델명> <noreply@anthropic.com>
    ```
 
-5. **커밋 후 확인**: `git log --oneline -1` 로 결과를 보고한다. `git push` 는 사용자가 별도로 요청할 때만.
+5. **커밋 후 확인**: `git log --oneline -1` 로 결과를 보고한다.
+   - **승인된 스펙 범위 안이면 push 까지 자동으로 진행한다** (AGENTS.md 10장). 스펙 없는 작업이면 push 는 사용자가 요청할 때만.
 
 ## 예시
 
@@ -50,5 +51,5 @@ metadata:
 ## 금지
 
 - `--amend` / `reset --hard` / `push --force` (AGENTS.md 10장 금지 명령)
-- 사용자 요청 없는 push
-- 사용자가 커밋을 요청하지 않았는데 이 스킬을 임의로 실행하는 것 (AGENTS.md 10장)
+- `main` 직접 푸시 — 항상 feature 브랜치 + PR (AGENTS.md 10장)
+- 승인된 스펙도 없고 사용자 요청도 없는데 커밋·푸시하는 것 (AGENTS.md 10장)
