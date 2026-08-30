@@ -234,6 +234,7 @@ make be-up / be-down / be-logs / be-ps
 - 에이전틱 개발: `docs/agentic.md` — 개발 시간(에이전트로 개발) + 런타임(앱 적용 패턴) 두 층위 정리
 - 인프라/배포: `docs/infra.md` — BE=Cloud Run / FE=Cloudflare 결정·최초 셋업·AI 제어법
 - 회사 표준 적용 현황: `docs/standards-adoption.md` — 무엇을 적용했고 **무엇을 왜 안 했는지**
+- 백로그: `docs/backlog.md` — 해야 할 일의 단일 목록 (15장)
 
 ---
 
@@ -257,10 +258,7 @@ make be-up / be-down / be-logs / be-ps
 
 ---
 
-## 15. 향후 방향 (TBD)
+## 15. 향후 방향
 
-- **커버리지 게이트** — 지금 테스트가 적어 기준선을 그으면 숫자놀음이다. 테스트가 쌓인 뒤 측정하고, 기준은 측정값보다 낮게 잡는다 (기준을 낮춰 통과시키는 습관을 막기 위해).
-- **DDD / TDD 도입 여부** (별도 논의)
-- **AI 리뷰 도구 연동** (CodeRabbit 등) — PR 루프(10장)는 도구 없이도 성립하므로 규칙은 이미 있다.
-- **LLM 제공자 연동 · 런타임 패턴 콘텐츠** — `docs/agentic.md` 2장이 목록만 있는 상태다. 이 프로젝트의 본체이며 회사 레포에서 참고할 것이 없어 별도 작업으로 진행한다.
-- 브랜치 전략 방향 확정(2026-07-12): **GitHub Flow**(main + feature 브랜치 + PR).
+- **해야 할 일은 [`docs/backlog.md`](docs/backlog.md) 한곳에서 관리한다.** 여기와 spec 진행 로그에 할 일을 나눠 적지 않는다 — 작업을 시작할 때는 백로그 항목을 specs 폴더로 옮긴다.
+- 확정된 방향: 브랜치 전략은 **GitHub Flow**(main + feature 브랜치 + PR — 2026-07-12 확정).
